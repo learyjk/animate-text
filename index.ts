@@ -23,6 +23,7 @@ enum ATTRIBUTE_VALUES {
   SLIDE_FROM_RIGHT = "slide-from-right",
   BOUNCE_IN = "bounce-in",
   SCALE_IN = "scale-in",
+  BLUR_IN = "blur-in",
 }
 
 // SELECTORS
@@ -141,5 +142,28 @@ elementsToAnimate.forEach((el) => {
       repeat,
       repeatDelay,
     });
+  }
+
+  if (attributeValue === ATTRIBUTE_VALUES.BLUR_IN) {
+    const splitText = splitIntoLetters(el);
+    let { duration, stagger, ease, textDivision, repeat, repeatDelay } =
+      getCustomProps(el);
+    const tl = gsap.timeline({ repeat, repeatDelay });
+    tl.from(splitText[textDivision], {
+      scrollTrigger: el,
+      opacity: 0,
+      scale: 0,
+      duration,
+      stagger,
+      ease,
+    }).from(
+      el,
+      {
+        letterSpacing: "0.05em",
+        filter: "blur(40px)",
+        duration: 2,
+      },
+      "<"
+    );
   }
 });
