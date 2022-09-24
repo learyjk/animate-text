@@ -22,6 +22,7 @@ enum ATTRIBUTE_VALUES {
   FADE_IN_FROM_LEFT = "fade-in-from-left",
   SLIDE_FROM_RIGHT = "slide-from-right",
   BOUNCE_IN = "bounce-in",
+  SCALE_IN = "scale-in",
 }
 
 // SELECTORS
@@ -121,6 +122,22 @@ elementsToAnimate.forEach((el) => {
       duration,
       stagger,
       ease: "back.out(2)",
+      repeat,
+      repeatDelay,
+    });
+  }
+
+  if (attributeValue === ATTRIBUTE_VALUES.SCALE_IN) {
+    const splitText = splitIntoLetters(el);
+    let { duration, stagger, ease, textDivision, repeat, repeatDelay } =
+      getCustomProps(el);
+    gsap.from(splitText[textDivision], {
+      scrollTrigger: el,
+      opacity: 0,
+      scale: 4,
+      duration,
+      stagger,
+      ease,
       repeat,
       repeatDelay,
     });
