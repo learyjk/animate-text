@@ -24,6 +24,8 @@ enum ATTRIBUTE_VALUES {
   BOUNCE_IN = "bounce-in",
   SCALE_IN = "scale-in",
   BLUR_IN = "blur-in",
+  SIDE_ELASTIC_REVEAL = "side-elastic-reveal",
+  ROTATED_REVEAL = "rotated-reveal",
 }
 
 // SELECTORS
@@ -33,9 +35,9 @@ let elementsToAnimate: NodeListOf<Element> = document.querySelectorAll(
 
 // HELPERS
 const getCustomProps = (element: Element): Props => {
-  let duration = Number(element.getAttribute("duration")) || 0.3;
-  let stagger = Number(element.getAttribute("stagger")) || 0.1;
-  let ease = element.getAttribute("ease") || "power2.out";
+  let duration = Number(element.getAttribute("duration"));
+  let stagger = Number(element.getAttribute("stagger"));
+  let ease = String(element.getAttribute("ease"));
   let textDivision = element.getAttribute("text-division") || "chars";
   let repeat = Number(element.getAttribute("repeat")) || -1;
   let repeatDelay = Number(element.getAttribute("repeat-delay")) || 2;
@@ -52,6 +54,7 @@ const getCustomProps = (element: Element): Props => {
 // ANIMATE LOOP
 elementsToAnimate.forEach((el) => {
   let attributeValue = el.getAttribute("wb-text-animate");
+
   if (attributeValue === ATTRIBUTE_VALUES.STAGGER_TEXT) {
     let { duration, stagger, ease, textDivision, repeat, repeatDelay } =
       getCustomProps(el);
@@ -61,11 +64,10 @@ elementsToAnimate.forEach((el) => {
       scrollTrigger: el,
       opacity: 0,
       y: "100%",
-      duration,
-      stagger,
-      ease,
+      stagger: stagger || 0.03,
       repeat,
       repeatDelay,
+      ease: "expo.out",
     });
   }
 
@@ -76,9 +78,8 @@ elementsToAnimate.forEach((el) => {
     gsap.from(splitText[textDivision], {
       scrollTrigger: el,
       opacity: 0,
-      duration,
-      stagger,
-      ease,
+      stagger: stagger || 0.1,
+      ease: "power2.out",
       repeat,
       repeatDelay,
     });
@@ -92,18 +93,17 @@ elementsToAnimate.forEach((el) => {
     tl.from(splitText[textDivision], {
       scrollTrigger: el,
       opacity: 0,
-      x: "100%",
-      duration,
-      stagger: 0.05,
-      ease: "sine.inOut",
+      x: "200%",
+      stagger: stagger || 0.05,
+      ease: "expo.out",
       repeatDelay,
     }).from(
       el,
       {
         scrollTrigger: el,
         opacity: 0,
-        x: "10%",
-        duration: stagger * el.textContent!.length,
+        x: "15%",
+        duration: (stagger || 0.05) * el.textContent!.length * 2,
         ease: "expo.out",
         repeatDelay,
       },
@@ -120,8 +120,7 @@ elementsToAnimate.forEach((el) => {
       opacity: 0,
       scaleX: 0,
       y: "100%",
-      duration,
-      stagger,
+      stagger: stagger || 0.1,
       ease: "back.out(2)",
       repeat,
       repeatDelay,
@@ -136,8 +135,7 @@ elementsToAnimate.forEach((el) => {
       scrollTrigger: el,
       opacity: 0,
       scale: 4,
-      duration,
-      stagger,
+      stagger: stagger || 0.1,
       ease,
       repeat,
       repeatDelay,
@@ -153,17 +151,44 @@ elementsToAnimate.forEach((el) => {
       scrollTrigger: el,
       opacity: 0,
       scale: 0,
-      duration,
-      stagger,
+      stagger: stagger || 0.1,
       ease,
     }).from(
       el,
       {
-        letterSpacing: "0.05em",
+        letterSpacing: "3em",
         filter: "blur(40px)",
-        duration: 2,
+        duration: duration || 2,
       },
       "<"
     );
+  }
+  if (attributeValue === ATTRIBUTE_VALUES.SIDE_ELASTIC_REVEAL) {
+    const splitText = splitIntoLetters(el);
+    let { duration, stagger, ease, textDivision, repeat, repeatDelay } =
+      getCustomProps(el);
+    const tl = gsap.timeline({ repeat, repeatDelay });
+    tl.from(splitText[textDivision], {
+      scrollTrigger: el,
+      x: "-200%",
+      opacity: 0,
+      stagger: stagger || 0.05,
+      ease: "back.out(4)",
+    });
+  }
+
+  if (attributeValue === ATTRIBUTE_VALUES.ROTATED_REVEAL) {
+    const splitText = splitIntoLetters(el);
+    let { duration, stagger, ease, textDivision, repeat, repeatDelay } =
+      getCustomProps(el);
+    const tl = gsap.timeline({ repeat, repeatDelay });
+    tl.from(splitText[textDivision], {
+      scrollTrigger: el,
+      y: "100%",
+      rotateZ: "20deg",
+      opacity: 0,
+      stagger: stagger || 0.2,
+      ease: "expo.out",
+    });
   }
 });
