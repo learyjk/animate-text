@@ -177,18 +177,21 @@ elementsToAnimate.forEach((el) => {
     });
   }
 
+  // rotated reveal
   if (attributeValue === ATTRIBUTE_VALUES.ROTATED_REVEAL) {
     const splitText = splitIntoLetters(el);
     let { duration, stagger, ease, textDivision, repeat, repeatDelay } =
       getCustomProps(el);
-    const tl = gsap.timeline({ repeat, repeatDelay });
-    tl.from(splitText[textDivision], {
+    gsap.from(splitText[textDivision], {
       scrollTrigger: el,
       y: "100%",
       rotateZ: "20deg",
       opacity: 0,
-      stagger: stagger || 0.2,
+      duration: 1,
+      stagger: stagger || 0.5,
       ease: "expo.out",
+      repeat,
+      repeatDelay,
     });
   }
 });
