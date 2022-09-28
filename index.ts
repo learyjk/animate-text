@@ -96,7 +96,6 @@ elementsToAnimate.forEach((el) => {
       x: "200%",
       stagger: stagger || 0.05,
       ease: "expo.out",
-      repeatDelay,
     }).from(
       el,
       {
@@ -105,12 +104,12 @@ elementsToAnimate.forEach((el) => {
         x: "15%",
         duration: (stagger || 0.05) * el.textContent!.length * 2,
         ease: "expo.out",
-        repeatDelay,
       },
       "<"
     );
   }
 
+  //bounce it
   if (attributeValue === ATTRIBUTE_VALUES.BOUNCE_IN) {
     const splitText = splitIntoLetters(el);
     let { duration, stagger, ease, textDivision, repeat, repeatDelay } =
