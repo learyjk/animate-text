@@ -19,7 +19,7 @@ declare type Props = {
 // CONSTANTS
 const ATTRIBUTE_PROP = "wb-animate-text";
 enum ATTRIBUTE_VALUES {
-  STAGGER_TEXT = "stagger-text",
+  STAGGER_TEXT = "stagger-from-bottom",
   FADE_IN_FROM_LEFT = "fade-in-from-left",
   SLIDE_FROM_RIGHT = "slide-from-right",
   BOUNCE_IN = "bounce-in",
