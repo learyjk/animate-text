@@ -8,7 +8,7 @@ wb-animate-text offers a no-code wrapper to common text animations with GSAP.
 
 simply add a custom attribute `wb-animate-text` to you Webflow project and value for animation you want:
 
-> Name = `wb-animate-text`
+> Name = `wb-animate-text`\
 > Value = `stagger-from-bottom`
 
 ## What Animations are available?
