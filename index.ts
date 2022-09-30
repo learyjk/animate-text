@@ -13,10 +13,11 @@ declare type Props = {
   textDivision: string;
   repeat: number;
   repeatDelay: number;
+  distanceFromViewportBottom: string;
 };
 
 // CONSTANTS
-const ATTRIBUTE_PROP = "wb-text-animate";
+const ATTRIBUTE_PROP = "wb-animate-text";
 enum ATTRIBUTE_VALUES {
   STAGGER_TEXT = "stagger-text",
   FADE_IN_FROM_LEFT = "fade-in-from-left",
@@ -35,12 +36,21 @@ let elementsToAnimate: NodeListOf<Element> = document.querySelectorAll(
 
 // HELPERS
 const getCustomProps = (element: Element): Props => {
+  // props with no defaults
   let duration = Number(element.getAttribute("duration"));
   let stagger = Number(element.getAttribute("stagger"));
   let ease = String(element.getAttribute("ease"));
+
+  // props with defaults
   let textDivision = element.getAttribute("text-division") || "chars";
-  let repeat = Number(element.getAttribute("repeat")) || -1;
+  let repeat = Number(element.getAttribute("repeat")) || 0;
   let repeatDelay = Number(element.getAttribute("repeat-delay")) || 2;
+  let distanceFromViewportBottom = element.getAttribute("distance-from-top")
+    ? `"bottom-=${element.getAttribute("distance-from-top")?.toString()}`
+    : "bottom-=10%";
+
+  console.log("distanceFromViewportBottom", distanceFromViewportBottom);
+
   return {
     duration,
     stagger,
@@ -48,59 +58,90 @@ const getCustomProps = (element: Element): Props => {
     textDivision,
     repeat,
     repeatDelay,
+    distanceFromViewportBottom,
   };
 };
 
 // ANIMATE LOOP
 elementsToAnimate.forEach((el) => {
-  let attributeValue = el.getAttribute("wb-text-animate");
+  const attributeValue = el.getAttribute(ATTRIBUTE_PROP);
+
+  const {
+    duration,
+    stagger,
+    ease,
+    textDivision,
+    repeat,
+    repeatDelay,
+    distanceFromViewportBottom,
+  } = getCustomProps(el);
+
+  const splitText = splitIntoLetters(el);
+
+  if (textDivision === "chars") {
+    gsap.set(el.querySelectorAll(".word"), { autoAlpha: 1 });
+    gsap.set(el.querySelectorAll(".line"), { autoAlpha: 1 });
+  }
+
+  if (textDivision === "words") {
+    gsap.set(el.querySelectorAll(".line"), { autoAlpha: 1 });
+    gsap.set(el.querySelectorAll(".char"), { autoAlpha: 1 });
+  }
+
+  if (textDivision === "lines") {
+    gsap.set(el.querySelectorAll(".word"), { autoAlpha: 1 });
+    gsap.set(el.querySelectorAll(".char"), { autoAlpha: 1 });
+  }
+
+  gsap.set(el, { autoAlpha: 1 });
 
   if (attributeValue === ATTRIBUTE_VALUES.STAGGER_TEXT) {
-    let { duration, stagger, ease, textDivision, repeat, repeatDelay } =
-      getCustomProps(el);
-    const splitText = splitIntoLetters(el);
-
     gsap.from(splitText[textDivision], {
-      scrollTrigger: el,
-      opacity: 0,
+      autoAlpha: 0,
       y: "100%",
-      stagger: stagger || 0.03,
+      stagger: stagger || 0.05,
       repeat,
       repeatDelay,
-      ease: "expo.out",
+      ease: ease || "expo.out",
+      scrollTrigger: {
+        trigger: el,
+        start: `bottom ${distanceFromViewportBottom}`,
+      },
     });
   }
 
   if (attributeValue === ATTRIBUTE_VALUES.FADE_IN_FROM_LEFT) {
-    const splitText = splitIntoLetters(el);
-    let { duration, stagger, ease, textDivision, repeat, repeatDelay } =
-      getCustomProps(el);
     gsap.from(splitText[textDivision], {
-      scrollTrigger: el,
-      opacity: 0,
+      autoAlpha: 0,
       stagger: stagger || 0.1,
       ease: "power2.out",
       repeat,
       repeatDelay,
+      scrollTrigger: {
+        trigger: el,
+        start: `bottom ${distanceFromViewportBottom}`,
+      },
     });
   }
 
   if (attributeValue === ATTRIBUTE_VALUES.SLIDE_FROM_RIGHT) {
-    const splitText = splitIntoLetters(el);
-    let { duration, stagger, ease, textDivision, repeat, repeatDelay } =
-      getCustomProps(el);
-    let tl = gsap.timeline({ repeat, repeatDelay });
+    let tl = gsap.timeline({
+      repeat,
+      repeatDelay,
+      scrollTrigger: {
+        trigger: el,
+        start: `bottom ${distanceFromViewportBottom}`,
+      },
+    });
     tl.from(splitText[textDivision], {
-      scrollTrigger: el,
-      opacity: 0,
+      autoAlpha: 0,
       x: "200%",
       stagger: stagger || 0.05,
       ease: "expo.out",
     }).from(
       el,
       {
-        scrollTrigger: el,
-        opacity: 0,
+        autoAlpha: 0,
         x: "15%",
         duration: (stagger || 0.05) * el.textContent!.length * 2,
         ease: "expo.out",
@@ -111,44 +152,47 @@ elementsToAnimate.forEach((el) => {
 
   //bounce it
   if (attributeValue === ATTRIBUTE_VALUES.BOUNCE_IN) {
-    const splitText = splitIntoLetters(el);
-    let { duration, stagger, ease, textDivision, repeat, repeatDelay } =
-      getCustomProps(el);
     gsap.from(splitText[textDivision], {
-      scrollTrigger: el,
-      opacity: 0,
+      autoAlpha: 0,
       scaleX: 0,
       y: "100%",
       stagger: stagger || 0.1,
       ease: "back.out(2)",
       repeat,
       repeatDelay,
+      scrollTrigger: {
+        trigger: el,
+        start: `bottom ${distanceFromViewportBottom}`,
+      },
     });
   }
 
   if (attributeValue === ATTRIBUTE_VALUES.SCALE_IN) {
-    const splitText = splitIntoLetters(el);
-    let { duration, stagger, ease, textDivision, repeat, repeatDelay } =
-      getCustomProps(el);
     gsap.from(splitText[textDivision], {
-      scrollTrigger: el,
-      opacity: 0,
+      autoAlpha: 0,
       scale: 4,
       stagger: stagger || 0.1,
       ease,
       repeat,
       repeatDelay,
+      scrollTrigger: {
+        trigger: el,
+        start: `bottom ${distanceFromViewportBottom}`,
+      },
     });
   }
 
   if (attributeValue === ATTRIBUTE_VALUES.BLUR_IN) {
-    const splitText = splitIntoLetters(el);
-    let { duration, stagger, ease, textDivision, repeat, repeatDelay } =
-      getCustomProps(el);
-    const tl = gsap.timeline({ repeat, repeatDelay });
+    const tl = gsap.timeline({
+      repeat,
+      repeatDelay,
+      scrollTrigger: {
+        trigger: el,
+        start: `bottom ${distanceFromViewportBottom}`,
+      },
+    });
     tl.from(splitText[textDivision], {
-      scrollTrigger: el,
-      opacity: 0,
+      autoAlpha: 0,
       scale: 0,
       stagger: stagger || 0.1,
       ease,
@@ -163,34 +207,36 @@ elementsToAnimate.forEach((el) => {
     );
   }
   if (attributeValue === ATTRIBUTE_VALUES.SIDE_ELASTIC_REVEAL) {
-    const splitText = splitIntoLetters(el);
-    let { duration, stagger, ease, textDivision, repeat, repeatDelay } =
-      getCustomProps(el);
-    const tl = gsap.timeline({ repeat, repeatDelay });
-    tl.from(splitText[textDivision], {
-      scrollTrigger: el,
+    //const tl = gsap.timeline({ repeat, repeatDelay });
+    gsap.from(splitText[textDivision], {
       x: "-200%",
-      opacity: 0,
+      autoAlpha: 0,
       stagger: stagger || 0.05,
       ease: "back.out(4)",
+      repeat,
+      repeatDelay,
+      scrollTrigger: {
+        trigger: el,
+        start: `bottom ${distanceFromViewportBottom}`,
+      },
     });
   }
 
   // rotated reveal
   if (attributeValue === ATTRIBUTE_VALUES.ROTATED_REVEAL) {
-    const splitText = splitIntoLetters(el);
-    let { duration, stagger, ease, textDivision, repeat, repeatDelay } =
-      getCustomProps(el);
     gsap.from(splitText[textDivision], {
-      scrollTrigger: el,
       y: "100%",
       rotateZ: "20deg",
-      opacity: 0,
+      autoAlpha: 0,
       duration: 1,
       stagger: stagger || 0.5,
       ease: "expo.out",
       repeat,
       repeatDelay,
+      scrollTrigger: {
+        trigger: el,
+        start: `bottom ${distanceFromViewportBottom}`,
+      },
     });
   }
 });
