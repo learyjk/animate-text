@@ -49,8 +49,6 @@ const getCustomProps = (element: Element): Props => {
     ? `"bottom-=${element.getAttribute("distance-from-top")?.toString()}`
     : "bottom-=10%";
 
-  console.log("distanceFromViewportBottom", distanceFromViewportBottom);
-
   return {
     duration,
     stagger,

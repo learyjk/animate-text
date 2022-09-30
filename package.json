@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "serve",
-    "build": "esbuild index.ts --bundle --minify --sourcemap --outfile=dist/index.js"
+    "build": "esbuild wb-animate-text.ts wb-animate-text.css --bundle --minify --sourcemap --outdir=dist"
   },
   "repository": {
     "type": "git",
