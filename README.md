@@ -5,6 +5,7 @@
 Animate Text is a no-code wrapper for GSAP to easily add award winning text animations to your web project. Animate Text offers multiple customization options on top of it's opinionated animation designs.
 
 https://user-images.githubusercontent.com/35752455/196008550-86d3ed46-c6e2-4549-8d5f-db2604eed1a2.mp4
+
 &nbsp;
 
 ## Demo Site
