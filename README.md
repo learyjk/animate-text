@@ -1,5 +1,7 @@
 # Web Bae Animate Text
 
+&nbsp;
+
 ## What is wb-animate-text?
 
 Animate Text is a no-code wrapper for GSAP to easily add award winning text animations to your web project. Animate Text offers multiple customization options on top of it's opinionated animation designs.
@@ -55,7 +57,8 @@ Alternatively you could jsut copy/paste the following CSS to your project rather
 - `side-elastic-reveal`
 - `rotated-reveal`
 - `skew-up`
-  &nbsp;
+
+&nbsp;
 
 ## Can I customize the animations?
 
