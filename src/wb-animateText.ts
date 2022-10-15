@@ -167,7 +167,7 @@ elementsToAnimate.forEach((el) => {
       scaleX: 0,
       y: "100%",
       stagger: stagger || 0.1,
-      ease: ease || "back.out(2)",
+      ease: "back.out(2)",
       repeat,
       repeatDelay,
       yoyo,
