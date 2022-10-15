@@ -55,7 +55,6 @@ const getCustomProps = (element: Element): Props => {
         .getAttribute("trigger-distance-from-bottom")
         ?.toString()}%`
     : "bottom-=10%";
-  console.log({ distanceFromViewportBottom });
 
   return {
     duration,
