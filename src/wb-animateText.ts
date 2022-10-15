@@ -147,14 +147,14 @@ elementsToAnimate.forEach((el) => {
       autoAlpha: 0,
       x: "200%",
       stagger: stagger || 0.05,
-      ease: ease || "expo.out",
+      ease: "expo.out",
     }).from(
       el,
       {
         autoAlpha: 0,
         x: "15%",
         duration: (stagger || 0.05) * el.textContent!.length * 2,
-        ease: ease || "expo.out",
+        ease: "expo.out",
       },
       "<"
     );
@@ -225,7 +225,7 @@ elementsToAnimate.forEach((el) => {
       x: "-200%",
       autoAlpha: 0,
       stagger: stagger || 0.05,
-      ease: ease || "back.out(4)",
+      ease: "back.out(4)",
       repeat,
       repeatDelay,
       yoyo,
