@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "serve",
-    "build": "esbuild wb-animate-text.ts wb-animate-text.css --bundle --minify --sourcemap --outdir=dist"
+    "build": "esbuild src/wb-animateText.ts src/wb-animateText.css --bundle --minify --sourcemap --outdir=dist --out-extension:.js=.min.js --out-extension:.css=.min.css"
   },
   "repository": {
     "type": "git",

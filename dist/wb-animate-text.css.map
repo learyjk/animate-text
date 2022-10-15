@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../wb-animate-text.css"],
-  "sourcesContent": ["[wb-animate-text],\n.char,\n.word,\n.line {\n  visibility: hidden;\n}\n"],
-  "mappings": "AAAA,oCAIE",
-  "names": []
-}
