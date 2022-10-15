@@ -4,7 +4,7 @@
 
 Animate Text is a no-code wrapper for GSAP to easily add award winning text animations to your web project. Animate Text offers multiple customization options on top of it's opinionated animation designs.
 
-![demo video](/assets/animateText.mov)
+![demo video](/assets/animate-text.mov)
 
 ## Demo Site
 
@@ -69,10 +69,42 @@ Default duration depends on the animation.
 > Name = `ease`\
 > Value = `power3.out`
 
-return {
-ease,
-repeat,
-repeatDelay,
-distanceFromViewportBottom,
-yoyo,
-};
+Specify any ease the GSAP accepts: https://greensock.com/ease-visualizer/
+
+Default ease depends on the animation
+
+### Repeat
+
+> Name = `repeat`\
+> Value = `-1`
+
+Specify a number of times for animation to repeat. `-1` for infinite repetitions.
+
+Default is 0 (animation plays only once)
+
+### Repeat Delay
+
+> Name = `repeat-delay`\
+> Value = `1`
+
+Specify a time in seconds to dleay between each animation repetition.
+
+Default value is 2 seconds.
+
+### Trigger istance From Viewport Bottom
+
+> Name = `trigger-distance-from-bottom`\
+> Value = `25`
+
+Specify a number which represents percent distance from viewport bottom for your animation to trigger. Percentage is relative to the bottom of your element. I.e. if 25 is entered as the value, you should expect your text to animate the bottom of the text is 25% from the bottom of the viewport.
+
+Default value is 10%
+
+### Yoyo
+
+> Name = `yoyo`\
+> Value = `true`
+
+Determines if the animation should 'yoyo', or 'play in reverse' after playing forward.
+
+Default value is false.
