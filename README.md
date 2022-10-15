@@ -11,6 +11,7 @@ https://user-images.githubusercontent.com/35752455/196008550-86d3ed46-c6e2-4549-
 ## Demo Site
 
 https://wb-animate-text.webflow.io/
+
 &nbsp;
 
 ## How do I use it?
