@@ -14,7 +14,22 @@ https://wb-animate-text.webflow.io/
 
 1. Add the script to before the `</body>` tag
 
+`<script src="https://cdn.jsdelivr.net/gh/learyjk/animate-text@1/dist/wb-animateText.min.js"></script> `
+
 2. Add the CSS styles to your `<head>` tag
+
+`<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/learyjk/animate-text@1/dist/wb-animateText.min.css">`
+
+Alternatively you could jsut copy/paste the following CSS to your project rather than making another request. This CSS prevent Flash of Unstyled Content (FOUC) on initial page load.
+
+```
+[wb-animate-text],
+.char,
+.word,
+.line {
+  visibility: hidden;
+}
+```
 
 3. Add a custom attribute `wb-animate-text` to you Webflow project and value for animation you want:
 
