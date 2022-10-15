@@ -12,10 +12,16 @@ https://wb-animate-text.webflow.io/
 
 ## How do I use it?
 
-simply add a custom attribute `wb-animate-text` to you Webflow project and value for animation you want:
+1. Add the script to before the </body> tag
+
+2. Add the CSS styles to your <head> tag
+
+3. Add a custom attribute `wb-animate-text` to you Webflow project and value for animation you want:
 
 > Name = `wb-animate-text`\
 > Value = `stagger-from-bottom`
+
+4. Customize as necessary with given opptions below.
 
 ## What Animations are available?
 

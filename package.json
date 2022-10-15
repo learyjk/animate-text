@@ -1,8 +1,8 @@
 {
-  "name": "text-animator",
+  "name": "animate-text",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/animateText.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "serve",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/learyjk/text-animator.git"
+    "url": "git+https://github.com/learyjk/animate-text.git"
   },
   "keywords": [
     "gsap",
@@ -22,9 +22,9 @@
   "author": "Keegan Leary",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/learyjk/text-animator/issues"
+    "url": "https://github.com/learyjk/animate-text/issues"
   },
-  "homepage": "https://github.com/learyjk/text-animator#readme",
+  "homepage": "https://github.com/learyjk/animate-text#readme",
   "dependencies": {
     "esbuild": "^0.15.9",
     "gsap": "^3.11.1",
