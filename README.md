@@ -5,10 +5,12 @@
 Animate Text is a no-code wrapper for GSAP to easily add award winning text animations to your web project. Animate Text offers multiple customization options on top of it's opinionated animation designs.
 
 https://user-images.githubusercontent.com/35752455/196008550-86d3ed46-c6e2-4549-8d5f-db2604eed1a2.mp4
+&nbsp;
 
 ## Demo Site
 
 https://wb-animate-text.webflow.io/
+&nbsp;
 
 ## How do I use it?
 
@@ -38,6 +40,8 @@ Alternatively you could jsut copy/paste the following CSS to your project rather
 
 ### 4. Customize as necessary with given opptions below.
 
+&nbsp;
+
 ## What Animations are available?
 
 - `stagger-from-bottom`
@@ -49,6 +53,7 @@ Alternatively you could jsut copy/paste the following CSS to your project rather
 - `side-elastic-reveal`
 - `rotated-reveal`
 - `skew-up`
+  &nbsp;
 
 ## Can I customize the animations?
 
