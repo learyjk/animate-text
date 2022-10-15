@@ -35,6 +35,15 @@ Yes! There are global customizations and some specific to individual animations.
 
 Here's a list of customizable properties.
 
+- `text-division`
+- `stagger`
+- `duration`
+- `ease`
+- `repeat`
+- `repeat-delay`
+- `trigger-distance-from-bottom`
+- `yoyo`
+
 ### Text Division
 
 > Name = `text-division`\
