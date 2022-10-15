@@ -16,7 +16,7 @@ https://wb-animate-text.webflow.io/
 
 `<script src="https://cdn.jsdelivr.net/gh/learyjk/animate-text@1/dist/wb-animateText.min.js"></script> `
 
-2. Add the CSS styles to your `<head>` tag
+**2. Add the CSS styles to your `<head>` tag**
 
 `<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/learyjk/animate-text@1/dist/wb-animateText.min.css">`
 
