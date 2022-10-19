@@ -131,7 +131,7 @@ Specify a time in seconds to dleay between each animation repetition.
 
 Default value is 2 seconds.
 
-### Trigger istance From Viewport Bottom
+### Trigger Distance From Viewport Bottom
 
 > Name = `trigger-distance-from-bottom`\
 > Value = `25`
