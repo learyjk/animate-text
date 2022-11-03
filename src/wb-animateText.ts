@@ -207,7 +207,6 @@ elementsToAnimate.forEach((el) => {
     tl.from(splitText[textDivision], {
       autoAlpha: 0,
       scale: 0,
-      stagger: stagger || 0.1,
       ease,
     }).from(
       el,
