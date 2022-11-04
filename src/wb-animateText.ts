@@ -181,7 +181,7 @@ elementsToAnimate.forEach((el) => {
   if (attributeValue === ATTRIBUTE_VALUES.SCALE_IN) {
     gsap.from(splitText[textDivision], {
       autoAlpha: 0,
-      scale: 4,
+      scale: 10,
       stagger: stagger || 0.1,
       ease,
       repeat,
@@ -207,12 +207,14 @@ elementsToAnimate.forEach((el) => {
     tl.from(splitText[textDivision], {
       autoAlpha: 0,
       scale: 0,
-      ease,
+      ease: ease || "ease.out",
+      duration: duration || 2,
     }).from(
       el,
       {
         letterSpacing: "3em",
         filter: "blur(40px)",
+        ease: ease || "ease.out",
         duration: duration || 2,
       },
       "<"
